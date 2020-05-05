@@ -17,18 +17,28 @@ git pull
 echo "# Compile Editor for Linux"
 scons -j${THREADS} platform=x11
 
-echo "# Get version"
+echo "# Get informations from compiled editor"
 COMPLETE_VERSION=$(${GODOT_PATH}/bin/godot.x11.tools.64 --version)
 echo "Complete version is ${COMPLETE_VERSION}"
 VERSION=$(echo "${COMPLETE_VERSION}" | sed 's|.custom.*||')
 echo "Version is '${VERSION}'"
 
-echo "# Compile Export templates for Linux 64bits"
-scons -j${THREADS} platform=x11 tools=no target=release bits=64
-scons -j${THREADS} platform=x11 tools=no target=release_debug bits=64
-
-echo "# Install export templates into ${USER} home"
+echo "# Create Template directory"
 TEMPLATE_DIR="${HOME}/.local/share/godot/templates/${VERSION}/"
 mkdir -p ${TEMPLATE_DIR}
+echo "Template directory is '${TEMPLATE_DIR}'"
+
+echo "# Compile and install export templates for Linux 64bits"
+scons -j${THREADS} platform=x11 tools=no target=release bits=64
 cp ${GODOT_PATH}/bin/godot.x11.opt.64 ${TEMPLATE_DIR}/linux_x11_64_release
+scons -j${THREADS} platform=x11 tools=no target=release_debug bits=64
 cp ${GODOT_PATH}/bin/godot.x11.opt.debug.64 ${TEMPLATE_DIR}/linux_x11_64_debug
+
+echo "# Compile and install export templates for Android"
+echo "TODO"
+
+echo "# Compile and install export templates for Windows"
+echo "TODO"
+
+echo "# Compile and install export templates for Web"
+echo "TODO"
