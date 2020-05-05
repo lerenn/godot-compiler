@@ -24,7 +24,7 @@ VERSION=$(echo "${COMPLETE_VERSION}" | sed 's|.custom.*||')
 echo "Version is '${VERSION}'"
 
 echo "# Create Template directory"
-TEMPLATE_DIR="${HOME}/.local/share/godot/templates/${VERSION}/"
+TEMPLATE_DIR="${HOME}/.local/share/godot/templates/${VERSION}"
 mkdir -p ${TEMPLATE_DIR}
 echo "Template directory is '${TEMPLATE_DIR}'"
 
@@ -41,4 +41,7 @@ echo "# Compile and install export templates for Windows"
 echo "TODO"
 
 echo "# Compile and install export templates for Web"
-echo "TODO"
+scons -j${THREADS} platform=javascript tools=no target=release javascript_eval=no
+cp ${GODOT_PATH}/bin/godot.javascript.opt.zip bin/webassembly_release.zip
+scons -j${THREADS} platform=javascript tools=no target=release_debug javascript_eval=no
+cp ${GODOT_PATH}/bin/godot.javascript.opt.debug.zip bin/webassembly_debug.zip
