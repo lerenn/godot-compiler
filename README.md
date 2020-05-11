@@ -1,8 +1,5 @@
-# Godot updater
+# Godot Compiler
 
-## Web 
+## Requirements
 
-Requirements:
-* [Emscripten 1.39.0+](https://emscripten.org)
-* [Python 3.5+](https://www.python.org/)
-* [SCons 3.0+](https://www.scons.org)
+For requirements, check the Godot Documentation website or the Dockerfile.
