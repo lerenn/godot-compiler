@@ -27,7 +27,7 @@ VERSION=$(echo "${COMPLETE_VERSION}" | sed 's|.custom.*||')
 echo "Version is '${VERSION}'"
 
 echo "# Create Template directory"
-TEMPLATE_DIR="/${TEMPLATE_BASE_DIR}/${VERSION}"
+TEMPLATE_DIR="${TEMPLATE_BASE_DIR}/${VERSION}"
 mkdir -p ${TEMPLATE_DIR}
 echo "Template directory is '${TEMPLATE_DIR}'"
 
@@ -39,19 +39,22 @@ cp ${GODOT_PATH}/bin/godot.x11.opt.debug.64 ${TEMPLATE_DIR}/linux_x11_64_debug
 
 echo "# Compile and install export templates for Android"
 # Release mode
-#scons -j${THREADS} platform=android target=release android_arch=armv7
-#scons -j${THREADS} platform=android target=release android_arch=arm64v8
-#scons -j${THREADS} platform=android target=release android_arch=x86
-#scons -j${THREADS} platform=android target=release android_arch=x86_64
+scons -j${THREADS} platform=android target=release android_arch=armv7
+scons -j${THREADS} platform=android target=release android_arch=arm64v8
+scons -j${THREADS} platform=android target=release android_arch=x86
+scons -j${THREADS} platform=android target=release android_arch=x86_64
 # Debug mode
-#scons -j${THREADS} platform=android target=release_debug android_arch=armv7
-#scons -j${THREADS} platform=android target=release_debug android_arch=arm64v8
-#scons -j${THREADS} platform=android target=release_debug android_arch=x86
-#scons -j${THREADS} platform=android target=release_debug android_arch=x86_64
+scons -j${THREADS} platform=android target=release_debug android_arch=armv7
+scons -j${THREADS} platform=android target=release_debug android_arch=arm64v8
+scons -j${THREADS} platform=android target=release_debug android_arch=x86
+scons -j${THREADS} platform=android target=release_debug android_arch=x86_64
 # Building the APK
-#cd platform/android/java
-#./gradlew generateGodotTemplates
-#cd ../../..
+cd platform/android/java
+./gradlew generateGodotTemplates
+cd ../../..
+# Copy file to templates directory
+cp ${GODOT_PATH}/bin/android_release.apk ${TEMPLATE_DIR}/
+cp ${GODOT_PATH}/bin/android_debug.apk ${TEMPLATE_DIR}/
 
 echo "# Compile and install export templates for Windows"
 echo "TODO"

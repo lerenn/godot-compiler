@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Except:
+!docker/
+!godot-compiler.sh
